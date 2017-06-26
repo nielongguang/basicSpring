@@ -10,16 +10,21 @@ import javax.servlet.ServletRegistration;
 
 /**
  * Created by Administrator on 2017/6/26.
+ *
  */
 
 public class WebInitializer implements WebApplicationInitializer {
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
         AnnotationConfigWebApplicationContext ctx =new AnnotationConfigWebApplicationContext();
-        ctx.register(SpringConfiguration.class);
+        ctx.register(SpringMvcConfiguration.class);
 
         ServletRegistration.Dynamic servlet = servletContext.addServlet("dispatcher", new DispatcherServlet(ctx));
         servlet.addMapping("/");
         servlet.setLoadOnStartup(1);
     }
+
+
+
+
 }
