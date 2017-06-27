@@ -35,6 +35,6 @@ public class LogAspect {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
         Action action = method.getAnnotation(Action.class);
-        System.out.println("方法规则式拦截" + action.name());
+        System.out.println("注解规则式拦截" + method.getName() );
     }
 }
