@@ -6,6 +6,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
@@ -15,6 +16,7 @@ import java.lang.reflect.Method;
  */
 @Aspect
 @Component
+@EnableAspectJAutoProxy
 public class LogAspect {
 
     @Pointcut("@annotation(com.cn.study.basicSpring.AOP.Action)")
@@ -33,6 +35,6 @@ public class LogAspect {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
         Action action = method.getAnnotation(Action.class);
-        System.out.println("方法规则式拦截" + method.getName());
+        System.out.println("方法规则式拦截" + action.name());
     }
 }
