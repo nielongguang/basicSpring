@@ -34,7 +34,7 @@ public class SpringMvcConfiguration extends WebMvcConfigurerAdapter{
         registry.addResourceHandler("/assets/**").addResourceLocations("classpath:/assets/");
     }
 
- //配置拦截器
+// 配置拦截器
     @Bean
     public DemoInterceptor demoInterceptor() {
         return new DemoInterceptor();
