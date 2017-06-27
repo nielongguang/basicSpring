@@ -1,6 +1,6 @@
 package com.cn.study.basicSpring.config;
 
-import com.cn.study.basicSpring.interceptor.DemoInterceptor;
+import com.cn.study.basicSpring.config.interceptor.DemoInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

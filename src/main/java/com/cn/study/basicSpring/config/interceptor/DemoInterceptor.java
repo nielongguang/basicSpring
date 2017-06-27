@@ -1,4 +1,4 @@
-package com.cn.study.basicSpring.interceptor;
+package com.cn.study.basicSpring.config.interceptor;
 
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
