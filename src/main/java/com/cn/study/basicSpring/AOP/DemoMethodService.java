@@ -12,6 +12,6 @@ public class DemoMethodService {
     }
 
     public void add() {
-        System.out.println("DemoMethodService拦截失败");
+        System.out.println("DemoMethodService");
     }
 }

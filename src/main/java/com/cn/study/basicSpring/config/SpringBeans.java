@@ -1,5 +1,6 @@
 package com.cn.study.basicSpring.config;
 
+import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.multipart.MultipartResolver;
@@ -17,5 +18,13 @@ public class SpringBeans {
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
         multipartResolver.setMaxInMemorySize(1000000);
    return multipartResolver;
+    }
+
+
+    @Bean
+    public SqlSessionFactoryBean sqlSessionFactory() {
+        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+//        sqlSessionFactoryBean.setDataSource();
+        return sqlSessionFactoryBean;
     }
 }

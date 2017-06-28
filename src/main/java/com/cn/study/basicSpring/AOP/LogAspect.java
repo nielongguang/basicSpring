@@ -27,7 +27,38 @@ public class LogAspect {
     public void before(JoinPoint joinPoint) {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
-        System.out.println("方法规则拦截" + method.getName());
+        System.out.println("方法规则拦截Before--" + method.getName());
+    }
+
+    @After("execution(* *..AOP*..*(..))")
+    public void AfterM(JoinPoint joinPoint) {
+        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+        Method method = signature.getMethod();
+        System.out.println("方法规则拦截After--" + method.getName());
+    }
+
+//    @Around("execution(* *..AOP*..*(..))")
+//    public void aroundM(JoinPoint joinPoint) {
+//        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+//        Method method = signature.getMethod();
+//        System.out.println("方法规则拦截Around--" + method.getName());
+//    }
+
+
+//    @Around("annotationPointCut()")
+//    public void around(JoinPoint joinPoint) {
+//        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+//        Method method = signature.getMethod();
+//        Action action = method.getAnnotation(Action.class);
+//        System.out.println("注解规则式拦截 Around--" + method.getName());
+//    }
+
+    @Before("annotationPointCut()")
+    public void beforeA(JoinPoint joinPoint) {
+        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+        Method method = signature.getMethod();
+        Action action = method.getAnnotation(Action.class);
+        System.out.println("注解规则式拦截 Before--" + method.getName());
     }
 
     @After("annotationPointCut()")
@@ -35,6 +66,6 @@ public class LogAspect {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
         Action action = method.getAnnotation(Action.class);
-        System.out.println("方法规则式拦截" + action.name());
+        System.out.println("注解规则式拦截After--" + method.getName());
     }
 }
