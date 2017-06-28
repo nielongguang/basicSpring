@@ -1,7 +1,8 @@
-package com.cn.study.basicSpring.controller;
+package com.cn.study.basicSpring.component.controller;
 
-import com.cn.study.basicSpring.service.DemoService;
+import com.cn.study.basicSpring.component.service.DemoService;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -15,8 +16,16 @@ public class MyRestController {
     @Resource
     private DemoService demoService;
 
+    @ResponseBody
     @RequestMapping(value = "/testRest", produces = {"text/plain;charset=UTF-8"})
     public String testRest() {
         return demoService.saySomeThing();
     }
+
+//    @RequestMapping(value = "/testQuery/{id}", produces = {"text/plain;charset=UTF-8"})
+//    public String testQuery(@PathVariable int id) {
+//        return demoService.sayName(id);
+//    }
+
+
 }
