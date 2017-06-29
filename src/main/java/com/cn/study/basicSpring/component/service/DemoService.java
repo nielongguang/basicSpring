@@ -18,6 +18,8 @@ public class DemoService {
     }
 
     public String sayName(int id) {
-        return this.iuserTDAO.getUser(id).getUser_name();
+        String result = this.iuserTDAO.getUser(id).getUser_name();
+        System.out.println(result);
+        return result;
     }
 }

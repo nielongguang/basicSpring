@@ -6,7 +6,7 @@
     <mapper namespace="com.cn.study.basicSpring.component.dao.IuserTDAO">
 
     <select id="getUser" parameterType="int" resultType="com.cn.study.basicSpring.component.model.UserT">
-         select * from users where id=#{id}
+        select * from user_t where id=#{id}
     </select>
 
 
