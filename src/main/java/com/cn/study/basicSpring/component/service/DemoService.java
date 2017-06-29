@@ -1,6 +1,9 @@
 package com.cn.study.basicSpring.component.service;
 
+import com.cn.study.basicSpring.component.dao.IuserTDAO;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * Created by Administrator on 2017/6/27.
@@ -8,13 +11,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class DemoService {
 
-//    @Resource
-//    private IuserTDAO iuserTDAO;
+    @Resource
+    private IuserTDAO iuserTDAO;
     public String saySomeThing() {
         return "hello";
     }
 
-//    public String sayName(int id) {
-//       return this.iuserTDAO.getUser(id).getUser_name();
-//    }
+    public String sayName(int id) {
+        return this.iuserTDAO.getUser(id).getUser_name();
+    }
 }
