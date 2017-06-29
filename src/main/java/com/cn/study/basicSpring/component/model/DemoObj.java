@@ -1,7 +1,4 @@
-package com.cn.study.basicSpring.model;
-
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+package com.cn.study.basicSpring.component.model;
 
 /**
  * Created by Administrator on 2017/6/26.

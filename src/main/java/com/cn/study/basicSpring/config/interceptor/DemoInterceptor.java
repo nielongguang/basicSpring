@@ -1,11 +1,8 @@
 package com.cn.study.basicSpring.config.interceptor;
 
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import javax.interceptor.Interceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 
 public class DemoInterceptor extends HandlerInterceptorAdapter {
-
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         long startTime = System.currentTimeMillis();
