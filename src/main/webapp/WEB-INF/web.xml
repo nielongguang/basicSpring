@@ -9,7 +9,6 @@
         <param-value>classpath:config/spring-dataresource.xml</param-value>
     </context-param>
 
-
     <filter>
        <filter-name>DruidWebStatFilter</filter-name>
        <filter-class>com.alibaba.druid.support.http.WebStatFilter</filter-class>

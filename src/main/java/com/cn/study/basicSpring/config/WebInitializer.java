@@ -19,6 +19,7 @@ public class WebInitializer implements WebApplicationInitializer {
     public void onStartup(ServletContext servletContext) throws ServletException {
         AnnotationConfigWebApplicationContext ctx =new AnnotationConfigWebApplicationContext();
         ctx.register(SpringMvcConfiguration.class);
+        //在此处可以增加监听器 拦截器 效果同在web.xml里面配置
         servletContext.addListener(ContextLoaderListener.class);
         Dynamic servlet = servletContext.addServlet("dispatcher", new DispatcherServlet(ctx));
         servlet.addMapping("/");
