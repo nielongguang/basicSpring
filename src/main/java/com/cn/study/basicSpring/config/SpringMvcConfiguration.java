@@ -50,6 +50,7 @@ public class SpringMvcConfiguration extends WebMvcConfigurerAdapter{
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("/index");
         registry.addViewController("toupload").setViewName("/upload");
+        registry.addViewController("/index").setViewName("/add/index");
     }
 
     //设置不忽略 .后面的参数
