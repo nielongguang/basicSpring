@@ -16,6 +16,11 @@ public class SpringBeans {
     public MultipartResolver multipartResolver() {
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
         multipartResolver.setMaxInMemorySize(1000000);
-   return multipartResolver;
+        return multipartResolver;
     }
+
+
+
+
+
 }

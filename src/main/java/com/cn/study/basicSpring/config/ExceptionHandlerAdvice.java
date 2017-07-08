@@ -1,6 +1,7 @@
 package com.cn.study.basicSpring.config;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @ControllerAdvice
 public class ExceptionHandlerAdvice {
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @ExceptionHandler(value = Exception.class)
     public ModelAndView exception(Exception exception, WebRequest request) {
@@ -31,4 +33,6 @@ public class ExceptionHandlerAdvice {
     public void initBinder(WebDataBinder webDataBinder) {
         webDataBinder.setDisallowedFields("id");
     }
+
+
 }

@@ -14,7 +14,7 @@ import org.springframework.web.servlet.view.JstlView;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan("com.cn.study.basicSpring")
+@ComponentScan(basePackages = "com.cn.study.basicSpring")
 public class SpringMvcConfiguration extends WebMvcConfigurerAdapter{
 
     @Bean //内部资源视图解析器 配置 这是springmvc的核心渲染机制
@@ -22,7 +22,7 @@ public class SpringMvcConfiguration extends WebMvcConfigurerAdapter{
     {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         //配置前后缀
-        viewResolver.setPrefix("/WEB-INF/classes/views");
+        viewResolver.setPrefix("/views");
         viewResolver.setSuffix(".jsp");
         //配置渲染方式.这里是Jstl 可以采用freemark或者其他静态模板的方式
         viewResolver.setViewClass(JstlView.class);
@@ -50,6 +50,7 @@ public class SpringMvcConfiguration extends WebMvcConfigurerAdapter{
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("/index");
         registry.addViewController("toupload").setViewName("/upload");
+        registry.addViewController("/index").setViewName("/add/index");
     }
 
     //设置不忽略 .后面的参数

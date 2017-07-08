@@ -1,6 +1,6 @@
-package com.cn.study.basicSpring.controller;
+package com.cn.study.basicSpring.component.controller;
 
-import com.cn.study.basicSpring.model.DemoObj;
+import com.cn.study.basicSpring.component.model.DemoObj;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
