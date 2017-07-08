@@ -6,7 +6,7 @@
     <mapper namespace="com.cn.study.basicSpring.component.dao.IuserTDAO">
 
     <select id="getUser" parameterType="int" resultType="com.cn.study.basicSpring.component.model.UserT">
-        select * from user_t where id=#{id}
+        select * from t_user where id=#{id}
     </select>
 
         <resultMap id="BaseResultMap" type="com.cn.study.basicSpring.component.model.TUser">
@@ -16,20 +16,6 @@
             <result property="roleid" column="roleId"/>
         </resultMap>
 
-        <sql id="Base_Column_List">
-            id, username, password,roleId
-        </sql>
-        <select id="findUserByUsername" parameterType="String" resultMap="BaseResultMap">
-            select
-            <include refid="Base_Column_List"/>
-            from t_user where userName=#{userName}
-        </select>
-        <select id="findRoles" parameterType="String" resultType="String">
-            select r.roleName from t_user u,t_role r where u.roleId=r.id and u.userName=#{userName}
-        </select>
-        <select id="findPermissions" parameterType="String" resultType="String">
-            select p.permissionName from t_user u,t_role r,t_permission p
-            where u.roleId=r.id and p.roleId=r.id and u.userName=#{userName}
-        </select>
+
 
 </mapper>
