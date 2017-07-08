@@ -2,9 +2,12 @@ package com.cn.study.basicSpring.component.controller;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.pam.AuthenticationStrategy;
 import org.apache.shiro.config.IniSecurityManagerFactory;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.Factory;
 import org.apache.shiro.util.ThreadContext;
@@ -78,10 +81,40 @@ public class LoginLogoutTest {
         subject.logout();
     }
 
+    private void logon(String configFile,String username,String password) {
+        //1.获取secutiryManager 工厂
+        // 此处使用Ini配置文件初始化SecurityManager
+        Factory<SecurityManager> factory =
+                new IniSecurityManagerFactory(configFile);
+        //2.得到SecutiryManaer实例，并绑定给SecutiryUtils
+         SecurityManager securityManager=factory.getInstance();
+        SecurityUtils.setSecurityManager(securityManager);
+        //3.得到subject以及创建用户名/密码验证令牌 token
+        Subject subject=SecurityUtils.getSubject();
+        UsernamePasswordToken token = new UsernamePasswordToken(username,password);
+        subject.login(token);
+    }
+
 
     @After
     public void tearDown() throws Exception {
         ThreadContext.unbindSubject();//退出时请解除绑定Subject到线程 否则对下次测试造成影响
+    }
+
+    @Test
+    public void  testAllSuccessfulStrategyWithSuccess() {
+        logon("classpath:shiro/shiro-authenticator-all-success.ini","zhang","123");
+        Subject subject=SecurityUtils.getSubject();
+        PrincipalCollection principalCollection = subject.getPrincipals();
+        Assert.assertEquals(2, principalCollection.asList().size());
+
+    }
+
+    @Test(expected = UnknownAccountException.class)
+    public void testAllSuccessfulStrategyWithFail() {
+
+        logon("classpath:shiro/shiro-authenticator-all-fail.ini","zhang","123");
+        Subject subject = SecurityUtils.getSubject();
     }
 
 
