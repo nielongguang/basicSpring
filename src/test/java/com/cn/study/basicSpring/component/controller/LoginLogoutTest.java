@@ -4,7 +4,6 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.authc.pam.AuthenticationStrategy;
 import org.apache.shiro.config.IniSecurityManagerFactory;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.subject.PrincipalCollection;
@@ -62,7 +61,7 @@ public class LoginLogoutTest {
     public void testJDBCRealm() {
         //1、获取SecurityManager工厂，此处使用Ini配置文件初始化SecurityManager
         Factory<org.apache.shiro.mgt.SecurityManager> factory =
-                new IniSecurityManagerFactory("classpath:shiro-jdbc-realm.ini");
+                new IniSecurityManagerFactory("classpath:shiro/shiro-jdbc-realm.ini");
         //2、得到SecurityManager实例 并绑定给SecurityUtils
         org.apache.shiro.mgt.SecurityManager securityManager = factory.getInstance();
         SecurityUtils.setSecurityManager(securityManager);
@@ -80,6 +79,19 @@ public class LoginLogoutTest {
         //6、退出
         subject.logout();
     }
+
+
+    @Test
+    public void testJDBCRealm1() {
+
+        logon("classpath:shiro/shiro-jdbc-realm.ini", "li", "234");
+        Subject subject = SecurityUtils.getSubject();
+        Assert.assertEquals(true, subject.isAuthenticated()); //断言用户已经登录
+        //6、退出
+        subject.logout();
+    }
+
+
 
     private void logon(String configFile,String username,String password) {
         //1.获取secutiryManager 工厂
@@ -114,7 +126,6 @@ public class LoginLogoutTest {
     public void testAllSuccessfulStrategyWithFail() {
 
         logon("classpath:shiro/shiro-authenticator-all-fail.ini","zhang","123");
-        Subject subject = SecurityUtils.getSubject();
     }
 
 

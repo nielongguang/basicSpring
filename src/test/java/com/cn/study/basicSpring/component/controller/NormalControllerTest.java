@@ -2,7 +2,6 @@ package com.cn.study.basicSpring.component.controller;
 
 import com.cn.study.basicSpring.AOP.DemoAnnotationService;
 import com.cn.study.basicSpring.AOP.DemoMethodService;
-import com.cn.study.basicSpring.config.SpringMvcConfiguration;
 import com.cn.study.basicSpring.component.service.DemoService;
 import org.junit.After;
 import org.junit.Before;
@@ -29,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes={SpringMvcConfiguration.class})
+@ContextConfiguration(locations = "classpath:/config/spring-dataresource.xml")
 @WebAppConfiguration("src/main/resources")
 public class NormalControllerTest {
 
@@ -69,7 +68,7 @@ public class NormalControllerTest {
         mockMvc.perform(get("/normal"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("/page"))
-                .andExpect(forwardedUrl("/WEB-INF/classes/views/page.jsp"))
+                .andExpect(forwardedUrl("/views/page.jsp"))
                 .andExpect(model().attribute("msg", demoService.saySomeThing()));
 
     }

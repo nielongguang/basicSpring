@@ -7,6 +7,7 @@ import org.apache.shiro.config.IniSecurityManagerFactory;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.Factory;
+import org.apache.shiro.util.ThreadContext;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -17,6 +18,12 @@ import java.util.Arrays;
  * Created by 96342 on 2017/7/8.
  */
 public class AuthorizationTest {
+
+
+    private static Subject subject() {
+        return SecurityUtils.getSubject();
+
+    }
 
     private void load(String iniResourcePath) {
         Factory<SecurityManager> factory = new IniSecurityManagerFactory(iniResourcePath);
@@ -39,6 +46,16 @@ public class AuthorizationTest {
         subject.login(token);
     }
 
+    @Test
+    public void testIsPermitted() {
+        login("classpath:shiro/shiro-permission.ini", "zhang", "123");
+//判断拥有权限：user:create
+        Assert.assertTrue(subject().isPermitted("user:create"));
+//判断拥有权限：user:update and user:delete
+        Assert.assertTrue(subject().isPermittedAll("user:update", "user:delete"));
+//判断没有权限：user:view
+        Assert.assertFalse(subject().isPermitted("user:view"));
+    }
 
     @Test
     public void testHasRole() {
@@ -53,11 +70,8 @@ public class AuthorizationTest {
         Assert.assertEquals(true, result[0]);
         Assert.assertEquals(true, result[1]);
         Assert.assertEquals(false, result[2]);
-    }
-
-    private Subject subject() {
-        Subject subject = SecurityUtils.getSubject();
-        return subject;
+        subject.logout();
+        ThreadContext.unbindSubject();
     }
 
     @Test(expected = UnauthorizedException.class)
@@ -69,16 +83,6 @@ public class AuthorizationTest {
         subject().checkRoles("role1", "role3");
     }
 
-    @Test
-    public void testIsPermitted() {
-        login("classpath:shiro/shiro-permission.ini", "zhang", "123");
-//判断拥有权限：user:create
-        Assert.assertTrue(subject().isPermitted("user:create"));
-//判断拥有权限：user:update and user:delete
-        Assert.assertTrue(subject().isPermittedAll("user:update", "user:delete"));
-//判断没有权限：user:view
-        Assert.assertFalse(subject().isPermitted("user:view"));
-    }
 
     @Test(expected = UnauthorizedException.class)
     public void testCheckPermission () {

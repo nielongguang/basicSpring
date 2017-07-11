@@ -59,7 +59,7 @@ public class ShiroTest {
     @Test
     public void JDBCtext() {
         //1.创建SecurityManager工厂，并加载实例
-        Factory<SecurityManager> factory = new IniSecurityManagerFactory("classpath:shiro-jdbc-realm.ini");
+        Factory<SecurityManager> factory = new IniSecurityManagerFactory("classpath:shiro/shiro-jdbc-realm.ini");
         SecurityManager securityManager =factory.getInstance();
         //2.將 安全管理實例交付給 安全管理抽象
         SecurityUtils.setSecurityManager(securityManager);
@@ -68,11 +68,9 @@ public class ShiroTest {
         //4.创建登录令牌，此处默认为 主体+密码模式，主体为用户名
         UsernamePasswordToken  token =new UsernamePasswordToken("zhang","123");
         //5.断言登录成功
-        try {
-            subject.login(token);
-        } catch (AuthenticationException e) {
 
-        }
+        subject.login(token);
+
         //isAutehticated表示已经验证
         Assert.assertTrue(subject.isAuthenticated());
         //6.注销登录
